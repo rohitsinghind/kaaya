@@ -1,6 +1,6 @@
 const express = require("express");
 const cloudinary = require("cloudinary");
-const { connectDatabase } = require("./config/database");
+const { connectDatabase } = require("./backend/config/database");
 const app = express();
 const cookieParser = require("cookie-parser");
 const path = require("path");
@@ -23,13 +23,13 @@ app.use(cookieParser());
 
 
 // Using Routes
-app.use("/api/v1", require("./routes/user"));
-app.use('/api/v1',require('./routes/product'));
+app.use("/api/v1", require("./backend/routes/user"));
+app.use('/api/v1',require('./backend/routes/product'));
 
-app.use(express.static(path.join(__dirname, "../frontend/build")));
+app.use(express.static(path.join(__dirname, "./frontend/build")));
 
 app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "../frontend/build/index.html"));
+  res.sendFile(path.resolve(__dirname, "./frontend/build/index.html"));
 });
 
 app.listen(process.env.PORT, () => {
