@@ -1,5 +1,6 @@
 const express = require("express");
 const cloudinary = require("cloudinary");
+var cors = require('cors')
 const { connectDatabase } = require("./backend/config/database");
 const app = express();
 const cookieParser = require("cookie-parser");
@@ -15,6 +16,8 @@ cloudinary.config({
   api_key: process.env.CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
+
+app.use(cors())
 
 // Using Middlewares
 app.use(express.json({ limit: "50mb" }));
